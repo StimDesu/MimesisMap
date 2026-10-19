@@ -77,6 +77,7 @@ namespace MimesisMap
         }
 
         private static GUISkin _skin;
+        private static float _resetConfirmUntil;
 
         /// <summary>Opaque, high-contrast copy of the default skin (the default window is see-through and grey-on-grey).</summary>
         private static void BuildSkin()
@@ -194,6 +195,18 @@ namespace MimesisMap
             GUILayout.Space(6);
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Сбросить исследование", GUILayout.Height(28))) MapController.ResetExploration();
+            bool confirming = Time.unscaledTime < _resetConfirmUntil;
+            if (GUILayout.Button(confirming ? "Точно? Нажмите ещё раз" : "Сбросить настройки", GUILayout.Height(28)))
+            {
+                if (confirming)
+                {
+                    _resetConfirmUntil = 0f;
+                    float res = Cfg.Resolution.Value;
+                    Cfg.ResetAll();
+                    if (Math.Abs(res - Cfg.Resolution.Value) > 0.01f) MapController.ForceRebuild();
+                }
+                else _resetConfirmUntil = Time.unscaledTime + 3f;
+            }
             if (GUILayout.Button("Пересобрать карту", GUILayout.Height(28))) MapController.ForceRebuild();
             if (GUILayout.Button("Сохранить и закрыть", GUILayout.Height(28))) Close();
             GUILayout.EndHorizontal();

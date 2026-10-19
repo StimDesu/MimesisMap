@@ -108,6 +108,15 @@ namespace MimesisMap
             Resolution = _cat.CreateEntry("MapResolution", 5f, "Map texels per metre (rebuild on next level)");
         }
 
+        /// <summary>Puts every MimesisMap setting back to its built-in default and saves.</summary>
+        public static void ResetAll()
+        {
+            foreach (var e in _cat.Entries)
+                try { e.ResetToDefault(); } catch (Exception ex) { MelonLogger.Warning($"Reset {e.Identifier} failed: {ex.Message}"); }
+            Save();
+            MelonLogger.Msg("[MimesisMap] Settings reset to defaults");
+        }
+
         public static void Save()
         {
             try { MelonPreferences.Save(); } catch (Exception e) { MelonLogger.Warning("Save failed: " + e.Message); }
