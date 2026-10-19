@@ -41,8 +41,14 @@ Every action has a main and an alternative binding (keys, mouse wheel, mouse but
 
 ## Install
 
-- **r2modman / Gale**: install [MimesisMap from Thunderstore](https://thunderstore.io/c/mimesis/p/StimDesu/MimesisMap/).
-- **Manually**: install [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) 0.7.x, then put `MimesisMap.dll` from the [releases](https://github.com/StimDesu/MimesisMap/releases) into the game's `Mods` folder.
+- **Mod manager** (r2modman, Gale, Thunderstore Mod Manager): install [MimesisMap from Thunderstore](https://thunderstore.io/c/mimesis/p/StimDesu/MimesisMap/). MelonLoader, which the mod needs, is installed automatically.
+- **Manually**: install [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) 0.7.x into the game and start the game once, then put `MimesisMap.dll` from the [releases](https://github.com/StimDesu/MimesisMap/releases) into the game's `Mods` folder.
+
+## Uninstall
+
+- **Mod manager**: disable or uninstall MimesisMap in your profile.
+- **Manually**: delete `MimesisMap.dll` from the game's `Mods` folder.
+- The settings stay in `UserData/MelonPreferences.cfg` in the `[MimesisMap]` section; delete that section if you want them gone too.
 
 ## Build from source
 
@@ -54,9 +60,15 @@ dotnet build -c Release
 
 The build also copies the mod into the r2modman `Default` profile if it exists. `pack.ps1` builds the Thunderstore package in `dist/` (it uses `README.thunderstore.md` as the package README).
 
+## AI disclosure
+
+This mod was made with the help of an AI assistant, **Claude** by Anthropic: the code, the documentation and the icon. The idea, the design decisions and the in-game testing are by **StimDesu**. The DLL states this in its assembly metadata as well.
+
 ## License and credits
 
-Public domain ([The Unlicense](LICENSE)). If you build on it, a mention is appreciated but not required: idea by **StimDesu**, code written with the AI assistant **Claude** (Anthropic). See [ATTRIBUTION.md](ATTRIBUTION.md).
+**Public domain** ([The Unlicense](LICENSE)): you may use, change and share this mod in any way, no permission needed.
+
+If you use it in your own work, it would be nice (but it is not required) to credit the idea to **StimDesu** and mention that the code was written with Claude. See [ATTRIBUTION.md](ATTRIBUTION.md).
 
 Thanks to [medovanx](https://github.com/medovanx/mimesis-patches) and [ToxesFoxes](https://github.com/ToxesFoxes/Mimesis-Minimap) for their minimap mods, which inspired several features.
 
@@ -103,15 +115,27 @@ Thanks to [medovanx](https://github.com/medovanx/mimesis-patches) and [ToxesFoxe
 
 ### Установка
 
-- **r2modman / Gale**: установите [MimesisMap из Thunderstore](https://thunderstore.io/c/mimesis/p/StimDesu/MimesisMap/).
-- **Вручную**: установите [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) 0.7.x и положите `MimesisMap.dll` из [релизов](https://github.com/StimDesu/MimesisMap/releases) в папку игры `Mods`.
+- **Менеджер модов** (r2modman, Gale, Thunderstore Mod Manager): установите [MimesisMap из Thunderstore](https://thunderstore.io/c/mimesis/p/StimDesu/MimesisMap/). Нужный моду MelonLoader поставится сам.
+- **Вручную**: установите [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) 0.7.x в игру и один раз запустите её, затем положите `MimesisMap.dll` из [релизов](https://github.com/StimDesu/MimesisMap/releases) в папку игры `Mods`.
+
+### Удаление
+
+- **Менеджер модов**: отключите или удалите MimesisMap в профиле.
+- **Вручную**: удалите `MimesisMap.dll` из папки игры `Mods`.
+- Настройки остаются в `UserData/MelonPreferences.cfg`, в разделе `[MimesisMap]`; удалите этот раздел, если хотите стереть и их.
 
 ### Сборка из исходников
 
 Нужны .NET SDK и игра. Проект ссылается на сборки игры в `MIMESIS_Data/Managed` и на MelonLoader относительно своей папки, поэтому клонируйте его в папку игры (`MIMESIS/MimesisMap`) или поменяйте `GameDir` в `MimesisMap.csproj`. Команда сборки: `dotnet build -c Release`. `pack.ps1` собирает пакет для Thunderstore в `dist/`.
 
+### Использование ИИ
+
+Мод сделан с помощью ИИ-ассистента **Claude** (Anthropic): код, документация и иконка. Идея, решения о том, как всё должно работать, и проверка в игре — **StimDesu**. В DLL это тоже указано в метаданных сборки.
+
 ### Лицензия
 
-Общественное достояние ([The Unlicense](LICENSE)). Если вы используете мод в своей работе, будем рады упоминанию: идея — **StimDesu**, код написан с помощью ИИ-ассистента **Claude** (Anthropic). Это просьба, а не условие, подробнее в [ATTRIBUTION.md](ATTRIBUTION.md).
+**Общественное достояние** ([The Unlicense](LICENSE)): мод можно использовать, менять и распространять как угодно, без разрешения.
+
+Если вы используете его в своей работе, будем рады (но это не обязательно), если вы упомянете, что идея принадлежит **StimDesu**, а код написан с помощью Claude. Подробнее в [ATTRIBUTION.md](ATTRIBUTION.md).
 
 Спасибо [medovanx](https://github.com/medovanx/mimesis-patches) и [ToxesFoxes](https://github.com/ToxesFoxes/Mimesis-Minimap) за их моды миникарты, которые вдохновили часть возможностей.

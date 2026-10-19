@@ -37,13 +37,31 @@ Every action has a main and an alternative binding (keys, mouse wheel, mouse but
 | Minimap on/off | F6 | — |
 | Settings window | F8 | — |
 
+## Install
+
+- **Mod manager** (r2modman, Gale, Thunderstore Mod Manager): click **Install**. MelonLoader, which the mod needs, is installed automatically.
+- **Manually**: install [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) 0.7.x into the game and start the game once, then put `MimesisMap.dll` from the [releases](https://github.com/StimDesu/MimesisMap/releases) into the game's `Mods` folder.
+
+## Uninstall
+
+- **Mod manager**: disable or uninstall MimesisMap in your profile.
+- **Manually**: delete `MimesisMap.dll` from the game's `Mods` folder.
+- The settings stay in `UserData/MelonPreferences.cfg` in the `[MimesisMap]` section; delete that section if you want them gone too.
+
 ## Notes
 
 - Loot, monsters and teammates are only known to your game when the server sends them, which is roughly when they are near you.
-- Settings are stored in `UserData/MelonPreferences.cfg` of your profile.
 
-## Source, license and credits
+## AI disclosure
 
-Source code: https://github.com/StimDesu/MimesisMap
+This mod was made with the help of an AI assistant, **Claude** by Anthropic: the code, the documentation and the icon. The idea, the design decisions and the in-game testing are by **StimDesu**. The DLL states this in its assembly metadata as well.
 
-Public domain (The Unlicense). A mention is appreciated but not required: idea by **StimDesu**, code written with the AI assistant **Claude** (Anthropic).
+## Source
+
+https://github.com/StimDesu/MimesisMap
+
+## License
+
+**Public domain** ([The Unlicense](https://github.com/StimDesu/MimesisMap/blob/main/LICENSE)): you may use, change and share this mod in any way, no permission needed.
+
+If you use it in your own work, it would be nice (but it is not required) to credit the idea to **StimDesu** and mention that the code was written with Claude.
