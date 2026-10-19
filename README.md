@@ -6,6 +6,14 @@ A building map and minimap for **MIMESIS**. The building is put together from pr
 
 **Only you need it.** It is fully client-side: the host and other players don't need the mod.
 
+## Screenshots
+
+![Big map in game: explored rooms, path to the exit, loot](screenshots/bigmap-ingame.png)
+
+![Minimap, round](screenshots/minimap-circle.png) ![Minimap, square](screenshots/minimap-square.png)
+
+![In-game settings (F8)](screenshots/settings-1.png)
+
 ## Features
 
 - **Map of the building, room by room.** A room appears as soon as you step into it, not only the area around you. Or switch to the **full map** from the start.
@@ -59,6 +67,14 @@ Thanks to [medovanx](https://github.com/medovanx/mimesis-patches) and [ToxesFoxe
 Карта здания и миникарта для **MIMESIS**. Здание каждый раз собирается из готовых комнат, и запомнить дорогу назад трудно: MimesisMap рисует то, что вы уже исследовали, комната за комнатой.
 
 **Мод нужен только вам.** Он полностью клиентский: хосту и другим игрокам ставить его не нужно.
+
+### Скриншоты
+
+![Большая карта в игре: открытые комнаты, путь до выхода, лут](screenshots/bigmap-ingame.png)
+
+![Миникарта: круг](screenshots/minimap-circle.png) ![Миникарта: квадрат](screenshots/minimap-square.png)
+
+![Большая карта на русском](screenshots/bigmap-ru.png)
 
 ### Возможности
 
