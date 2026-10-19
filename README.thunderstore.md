@@ -4,6 +4,14 @@ A building map and minimap for **MIMESIS**. The building is put together from pr
 
 **Only you need it.** It is fully client-side: the host and other players don't need the mod.
 
+## Screenshots
+
+![Big map in game: explored rooms, path to the exit, loot](https://raw.githubusercontent.com/StimDesu/MimesisMap/main/screenshots/bigmap-ingame.png)
+
+![Minimap, round](https://raw.githubusercontent.com/StimDesu/MimesisMap/main/screenshots/minimap-circle.png) ![Minimap, square](https://raw.githubusercontent.com/StimDesu/MimesisMap/main/screenshots/minimap-square.png)
+
+![In-game settings (F8)](https://raw.githubusercontent.com/StimDesu/MimesisMap/main/screenshots/settings-1.png)
+
 ## Features
 
 - **Map of the building, room by room.** A room appears as soon as you step into it, not only the area around you. Or switch to the **full map** from the start.
