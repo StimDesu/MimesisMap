@@ -16,6 +16,7 @@ namespace MimesisMap
         private static MelonPreferences_Category _cat;
 
         // General
+        public static MelonPreferences_Entry<Lang> Language;
         public static MelonPreferences_Entry<RevealMode> Reveal;
         public static MelonPreferences_Entry<MapStyle> Style;
         public static MelonPreferences_Entry<bool> NeighborHints;
@@ -69,6 +70,7 @@ namespace MimesisMap
         {
             _cat = MelonPreferences.CreateCategory("MimesisMap", "Mimesis Map");
 
+            Language = _cat.CreateEntry("Language", Lang.Auto, "UI language", "Auto = system language, Russian, English");
             Reveal = _cat.CreateEntry("RevealMode", RevealMode.Explored, "Reveal mode", "Explored = rooms open as you visit them, Full = whole map visible");
             Style = _cat.CreateEntry("Style", MapStyle.Plain, "Map style", "Plain = schematic floor plan, Graphic = real top-down view from a camera above you");
             NeighborHints = _cat.CreateEntry("NeighborHints", true, "Hint unexplored neighbours", "Faintly draw unexplored rooms adjacent to explored ones");
@@ -111,12 +113,12 @@ namespace MimesisMap
 
             Resolution = _cat.CreateEntry("MapResolution", 5f, "Map texels per metre (rebuild on next level)");
 
-            BSettings = new Bind("Окно настроек", SettingsKey, _cat.CreateEntry("SettingsKeyAlt", "", "Settings window key (alternative)"));
-            BBigMap = new Bind("Большая карта", BigMapKey, _cat.CreateEntry("BigMapKeyAlt", "", "Big map key (alternative)"));
-            BMini = new Bind("Миникарта вкл/выкл", MiniKey, _cat.CreateEntry("MinimapKeyAlt", "", "Minimap toggle key (alternative)"));
-            BZoomIn = new Bind("Приблизить большую карту", _cat.CreateEntry("ZoomInKey", "Equals", "Big map zoom in"), _cat.CreateEntry("ZoomInKeyAlt", "WheelUp", "Big map zoom in (alternative)"));
-            BZoomOut = new Bind("Отдалить большую карту", _cat.CreateEntry("ZoomOutKey", "Minus", "Big map zoom out"), _cat.CreateEntry("ZoomOutKeyAlt", "WheelDown", "Big map zoom out (alternative)"));
-            BRecenter = new Bind("Большая карта: к себе", _cat.CreateEntry("RecenterKey", "R", "Big map recenter"), _cat.CreateEntry("RecenterKeyAlt", "Home", "Big map recenter (alternative)"));
+            BSettings = new Bind("Окно настроек", "Settings window", SettingsKey, _cat.CreateEntry("SettingsKeyAlt", "", "Settings window key (alternative)"));
+            BBigMap = new Bind("Большая карта", "Big map", BigMapKey, _cat.CreateEntry("BigMapKeyAlt", "", "Big map key (alternative)"));
+            BMini = new Bind("Миникарта вкл/выкл", "Minimap on/off", MiniKey, _cat.CreateEntry("MinimapKeyAlt", "", "Minimap toggle key (alternative)"));
+            BZoomIn = new Bind("Приблизить большую карту", "Big map zoom in", _cat.CreateEntry("ZoomInKey", "Equals", "Big map zoom in"), _cat.CreateEntry("ZoomInKeyAlt", "WheelUp", "Big map zoom in (alternative)"));
+            BZoomOut = new Bind("Отдалить большую карту", "Big map zoom out", _cat.CreateEntry("ZoomOutKey", "Minus", "Big map zoom out"), _cat.CreateEntry("ZoomOutKeyAlt", "WheelDown", "Big map zoom out (alternative)"));
+            BRecenter = new Bind("Большая карта: к себе", "Big map: recentre", _cat.CreateEntry("RecenterKey", "R", "Big map recenter"), _cat.CreateEntry("RecenterKeyAlt", "Home", "Big map recenter (alternative)"));
             Binds = new[] { BBigMap, BZoomIn, BZoomOut, BRecenter, BMini, BSettings };
         }
 
@@ -191,12 +193,12 @@ namespace MimesisMap
             switch (name)
             {
                 case null: case "": return "—";
-                case WheelUp: return "Колесо вверх";
-                case WheelDown: return "Колесо вниз";
-                case "MouseMiddle": return "Средняя кн. мыши";
-                case "MouseRight": return "Правая кн. мыши";
-                case "MouseBack": return "Мышь: назад";
-                case "MouseForward": return "Мышь: вперёд";
+                case WheelUp: return Loc.T("Колесо вверх", "Wheel up");
+                case WheelDown: return Loc.T("Колесо вниз", "Wheel down");
+                case "MouseMiddle": return Loc.T("Средняя кн. мыши", "Middle mouse");
+                case "MouseRight": return Loc.T("Правая кн. мыши", "Right mouse");
+                case "MouseBack": return Loc.T("Мышь: назад", "Mouse back");
+                case "MouseForward": return Loc.T("Мышь: вперёд", "Mouse forward");
                 case "Equals": return "=";
                 case "Minus": return "-";
                 default: return name;
@@ -207,12 +209,13 @@ namespace MimesisMap
     /// <summary>An action with a main and an alternative binding.</summary>
     internal sealed class Bind
     {
-        public readonly string Label;
+        private readonly string _ru, _en;
         public readonly MelonPreferences_Entry<string> Main, Alt;
+        public string Label => Loc.T(_ru, _en);
 
-        public Bind(string label, MelonPreferences_Entry<string> main, MelonPreferences_Entry<string> alt)
+        public Bind(string ru, string en, MelonPreferences_Entry<string> main, MelonPreferences_Entry<string> alt)
         {
-            Label = label; Main = main; Alt = alt;
+            _ru = ru; _en = en; Main = main; Alt = alt;
         }
 
         public bool Pressed => Cfg.PressedName(Main.Value) || Cfg.PressedName(Alt.Value);

@@ -409,14 +409,16 @@ namespace MimesisMap
 
             if (_info != null)
             {
-                string mode = full ? "полная" : "исследование";
-                string where = model.Flat ? "Схема локации" : indoor ? $"Комнат открыто: {model.RevealedCount} / {model.Tiles.Count}" : "Снаружи";
-                var legend = "<color=#ffffff>▲</color> вы   <color=#c7adff>▙</color> лестница";
-                if (Cfg.ShowTeammates.Value) legend += "   <color=#4df2ff>▲</color> союзники";
-                if (Cfg.ShowMonsters.Value) legend += "   <color=#ff4033>●</color> монстры";
-                if (Cfg.ShowExit.Value) legend += "   <color=#59ff73>■</color> выход" + (Cfg.ShowExitPath.Value ? " <color=#59ff73>—</color> путь" : "");
-                if (Cfg.ShowLoot.Value) legend += "   лут: <color=#f2f28c>◆</color> дешёвый <color=#ffb833>◆</color> средний <color=#ff4dd9>◆</color> ценный";
-                _info.text = $"{where}   (режим: {mode})\n<size=15>{legend}\n<color=#9ab>[{Cfg.BBigMap.Text}] закрыть   [{Cfg.BZoomIn.Text}] / [{Cfg.BZoomOut.Text}] масштаб   [{Cfg.BRecenter.Text}] к себе   [{Cfg.BSettings.Text}] настройки</color></size>";
+                string mode = full ? Loc.T("полная", "full") : Loc.T("исследование", "explored");
+                string where = model.Flat ? Loc.T("Схема локации", "Area layout")
+                    : indoor ? Loc.T($"Комнат открыто: {model.RevealedCount} / {model.Tiles.Count}", $"Rooms explored: {model.RevealedCount} / {model.Tiles.Count}")
+                    : Loc.T("Снаружи", "Outside");
+                var legend = "<color=#ffffff>▲</color> " + Loc.T("вы", "you") + "   <color=#c7adff>▙</color> " + Loc.T("лестница", "stairs");
+                if (Cfg.ShowTeammates.Value) legend += "   <color=#4df2ff>▲</color> " + Loc.T("союзники", "teammates");
+                if (Cfg.ShowMonsters.Value) legend += "   <color=#ff4033>●</color> " + Loc.T("монстры", "monsters");
+                if (Cfg.ShowExit.Value) legend += "   <color=#59ff73>■</color> " + Loc.T("выход", "exit") + (Cfg.ShowExitPath.Value ? " <color=#59ff73>—</color> " + Loc.T("путь", "path") : "");
+                if (Cfg.ShowLoot.Value) legend += "   " + Loc.T("лут:", "loot:") + " <color=#f2f28c>◆</color> " + Loc.T("дешёвый", "cheap") + " <color=#ffb833>◆</color> " + Loc.T("средний", "medium") + " <color=#ff4dd9>◆</color> " + Loc.T("ценный", "valuable");
+                _info.text = $"{where}   ({Loc.T("режим", "mode")}: {mode})\n<size=15>{legend}\n<color=#9ab>[{Cfg.BBigMap.Text}] {Loc.T("закрыть", "close")}   [{Cfg.BZoomIn.Text}] / [{Cfg.BZoomOut.Text}] {Loc.T("масштаб", "zoom")}   [{Cfg.BRecenter.Text}] {Loc.T("к себе", "recentre")}   [{Cfg.BSettings.Text}] {Loc.T("настройки", "settings")}</color></size>";
             }
         }
 
