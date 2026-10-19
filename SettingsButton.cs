@@ -46,7 +46,7 @@ namespace MimesisMap
             text.fontSize = 18;
             text.alignment = TextAnchor.MiddleCenter;
             text.color = new Color(0.85f, 0.95f, 1f, 1f);
-            text.text = "Карта (мод)";
+            text.text = Loc.T("Карта (мод)", "Map (mod)");
             text.raycastTarget = false;
         }
     }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.0
+- English and Russian interface (Auto follows the system language), switchable in the settings window.
+- Settings window no longer gets a horizontal scrollbar: long labels wrap.
+
 ## 1.7.0
 - All controls can be rebound in the settings window, each with a main and an alternative binding (keyboard keys, mouse wheel, middle/right/side mouse buttons; Delete clears).
 - Big map zoom with the mouse wheel works in Hold mode too; clear the wheel binding to turn it off.
