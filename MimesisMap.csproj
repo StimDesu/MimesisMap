@@ -35,6 +35,12 @@
     <Reference Include="Unity.InputSystem"><HintPath>$(Managed)Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
 
+  <!-- AI disclosure (Thunderstore asks for it in the README and in the assembly metadata) -->
+  <ItemGroup>
+    <AssemblyMetadata Include="AI_Assisted_Creation" Value="This assembly was fully created with the assistance of Generative AI (code, documentation and icon), directed and tested by StimDesu." />
+    <AssemblyMetadata Include="AI_Model_Vendor" Value="Anthropic (Claude)" />
+  </ItemGroup>
+
   <Target Name="CopyToProfile" AfterTargets="Build" Condition="Exists('$(APPDATA)\r2modmanPlus-local\Mimesis\profiles\Default\Mods')">
     <MakeDir Directories="$(ProfileModsDir)" />
     <Copy SourceFiles="$(TargetPath);$(MSBuildThisFileDirectory)manifest.json" DestinationFolder="$(ProfileModsDir)" />
