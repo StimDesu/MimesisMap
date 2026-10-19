@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.0
+- All controls can be rebound in the settings window, each with a main and an alternative binding (keyboard keys, mouse wheel, middle/right/side mouse buttons; Delete clears).
+- Big map zoom with the mouse wheel works in Hold mode too; clear the wheel binding to turn it off.
+
 ## 1.6.0
 - Big map: Hold mode and rotation with your view are now the defaults.
 - Minimap gets the same orientation choice as the big map (rotate with view / north up).

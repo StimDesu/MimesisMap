@@ -8,7 +8,7 @@ A dungeon map and minimap for **MIMESIS**. The building is put together from pre
 
 - **Map of the building, room by room.** A room appears as soon as you step into it, not only the area around you. Or switch to the **full map** from the start.
 - **Minimap**: range, size, position, round or square, fixed north or rotating with your view.
-- **Big map** (Tab): opens centred on you, rotating with your view or north-up; in toggle mode mouse wheel zooms, drag pans, R recentres. It stays clear of the game's HUD.
+- **Big map** (Tab): opens centred on you, rotating with your view or north-up, mouse wheel zoom; in toggle mode drag to pan. It stays clear of the game's HUD.
 - **Exits**: building exits and entrance doors are marked, with the **shortest path to the nearest known exit** along the game's own navigation.
 - **Stairs and floors**: staircases get an icon, other floors are dimmed.
 - **Two styles**: clean floor plan (Plain) or a real top-down view with fog over unexplored rooms (Graphic).
@@ -19,14 +19,16 @@ A dungeon map and minimap for **MIMESIS**. The building is put together from pre
 
 ## Controls (default, all rebindable)
 
-| Key | Action |
-|---|---|
-| Tab | Big map (hold; press-to-toggle in settings) |
-| F6 | Minimap on/off |
-| F8 | Settings window |
-| Mouse wheel / + / - | Zoom the big map |
-| Drag | Pan the big map |
-| R | Recentre the big map on you |
+Every action has a main and an alternative binding; keys, the mouse wheel and mouse buttons can be used.
+
+| Action | Main | Alternative |
+|---|---|---|
+| Big map (hold; press-to-toggle in settings) | Tab | — |
+| Zoom in / out | = / - | Wheel up / down |
+| Recentre the big map on you | R | Home |
+| Minimap on/off | F6 | — |
+| Settings window | F8 | — |
+| Pan the big map (toggle mode) | drag with the mouse | |
 
 ## Install
 

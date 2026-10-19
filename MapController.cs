@@ -60,20 +60,21 @@ namespace MimesisMap
         {
             if (!SettingsWindow.Capturing)
             {
-                if (Cfg.Pressed(Cfg.SettingsKey)) SettingsWindow.Toggle();
-                if (Cfg.Pressed(Cfg.MiniKey)) { Cfg.MiniEnabled.Value = !Cfg.MiniEnabled.Value; Cfg.Save(); }
+                if (Cfg.BSettings.Pressed) SettingsWindow.Toggle();
+                if (Cfg.BMini.Pressed) { Cfg.MiniEnabled.Value = !Cfg.MiniEnabled.Value; Cfg.Save(); }
                 bool wasOpen = _bigOpen;
-                if (Cfg.BigMapKeyMode.Value == KeyMode.Hold) _bigOpen = Cfg.Held(Cfg.BigMapKey);
-                else if (Cfg.Pressed(Cfg.BigMapKey)) _bigOpen = !_bigOpen;
+                if (Cfg.BigMapKeyMode.Value == KeyMode.Hold) _bigOpen = Cfg.BBigMap.Held;
+                else if (Cfg.BBigMap.Pressed) _bigOpen = !_bigOpen;
                 if (_bigOpen && !wasOpen) { BigPan = Vector2.zero; BigOpenStamp++; }   // every opening starts centred on you
 
                 var kb = Keyboard.current;
                 if (_bigOpen && kb != null)
                 {
                     if (kb.escapeKey.wasPressedThisFrame) _bigOpen = false;
-                    if (kb.equalsKey.wasPressedThisFrame || kb.numpadPlusKey.wasPressedThisFrame) Zoom(1.25f);
-                    if (kb.minusKey.wasPressedThisFrame || kb.numpadMinusKey.wasPressedThisFrame) Zoom(1f / 1.25f);
-                    if (kb.rKey.wasPressedThisFrame || kb.homeKey.wasPressedThisFrame) { BigPan = Vector2.zero; BigOpenStamp++; }
+                    // works in Hold mode too (the game doesn't use the wheel for anything during play)
+                    if (Cfg.BZoomIn.Pressed) Zoom(1.2f);
+                    if (Cfg.BZoomOut.Pressed) Zoom(1f / 1.2f);
+                    if (Cfg.BRecenter.Pressed) { BigPan = Vector2.zero; BigOpenStamp++; }
                 }
             }
 
@@ -83,8 +84,6 @@ namespace MimesisMap
             var mouse = Mouse.current;
             if (interactive && mouse != null && !SettingsWindow.Open)
             {
-                float wheel = mouse.scroll.ReadValue().y;
-                if (wheel > 0.01f) Zoom(1.15f); else if (wheel < -0.01f) Zoom(1f / 1.15f);
                 if (mouse.leftButton.isPressed && _big != null && _big.LastPpm > 0.0001f)
                 {
                     var d = mouse.delta.ReadValue() * (1080f / Mathf.Max(1, Screen.height)) / _big.LastPpm;

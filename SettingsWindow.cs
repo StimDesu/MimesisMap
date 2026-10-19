@@ -50,13 +50,24 @@ namespace MimesisMap
             {
                 if (Time.frameCount <= _captureFrame) return;
                 if (kb.escapeKey.wasPressedThisFrame) { _capture = null; return; }
-                foreach (var k in kb.allKeys)
+                // Delete / Backspace clears the binding
+                if (kb.deleteKey.wasPressedThisFrame || kb.backspaceKey.wasPressedThisFrame) { _capture.Value = ""; _capture = null; return; }
+                string got = null;
+                var m = Mouse.current;
+                if (m != null)
                 {
-                    if (k == null || !k.wasPressedThisFrame) continue;
-                    _capture.Value = k.keyCode.ToString();
-                    _capture = null;
-                    break;
+                    float wheel = m.scroll.ReadValue().y;
+                    if (wheel > 0.01f) got = Cfg.WheelUp;
+                    else if (wheel < -0.01f) got = Cfg.WheelDown;
+                    else if (m.middleButton.wasPressedThisFrame) got = "MouseMiddle";
+                    else if (m.rightButton.wasPressedThisFrame) got = "MouseRight";
+                    else if (m.backButton.wasPressedThisFrame) got = "MouseBack";
+                    else if (m.forwardButton.wasPressedThisFrame) got = "MouseForward";
                 }
+                if (got == null)
+                    foreach (var k in kb.allKeys)
+                        if (k != null && k.wasPressedThisFrame) { got = k.keyCode.ToString(); break; }
+                if (got != null) { _capture.Value = got; _capture = null; }
                 return;
             }
             if (kb.escapeKey.wasPressedThisFrame) Close();
@@ -134,6 +145,10 @@ namespace MimesisMap
         {
             _scroll = GUILayout.BeginScrollView(_scroll);
 
+            Header("Управление");
+            GUILayout.Label("Две привязки на действие: основная и альтернативная. Нажмите кнопку, затем клавишу, колесо или кнопку мыши. Delete — очистить, Esc — отмена. Масштаб колесом выключается очисткой привязки «Колесо».", _small);
+            foreach (var b in Cfg.Binds) BindRow(b);
+
             Header("Общее");
             Choice("Режим карты", Cfg.Reveal, new[] { "Открывать по мере прохождения", "Вся карта сразу" });
             Choice("Стиль", Cfg.Style, new[] { "Схема (Plain)", "Вид сверху (Graphic)" });
@@ -141,10 +156,8 @@ namespace MimesisMap
                 GUILayout.Label(GraphicRenderer.Failed ? "Graphic-стиль не запустился (см. лог), используется схема." : "Камера над головой рендерит реальный вид сверху; неоткрытые комнаты закрыты туманом. Немного нагружает видеокарту.", _small);
             Toggle("Подсказывать соседние неоткрытые комнаты (бледно)", Cfg.NeighborHints);
             Toggle("Показывать территорию снаружи здания", Cfg.ShowOutdoor);
-            KeyBind("Окно настроек", Cfg.SettingsKey);
 
             Header("Большая карта");
-            KeyBind("Клавиша", Cfg.BigMapKey);
             Choice("Режим клавиши", Cfg.BigMapKeyMode, new[] { "Удержание", "Нажатие (вкл/выкл)" });
             Slider("Размер (доля свободной области)", Cfg.BigMapSize, 0.3f, 1f, "0.00");
             GUILayout.Label("Отступы, чтобы карта не залезала под интерфейс игры (пикс. при 1080p):", _small);
@@ -158,7 +171,6 @@ namespace MimesisMap
 
             Header("Миникарта");
             Toggle("Миникарта включена", Cfg.MiniEnabled);
-            KeyBind("Клавиша вкл/выкл", Cfg.MiniKey);
             Slider("Дальность отображения (м от игрока до края)", Cfg.MiniRange, 5f, 150f, "0");
             Slider("Размер (пикс. при 1080p)", Cfg.MiniSize, 100f, 800f, "0");
             Choice("Форма", Cfg.MiniShapeE, new[] { "Круг", "Квадрат" });
@@ -245,17 +257,23 @@ namespace MimesisMap
             if (sel != cur) e.Value = (T)Enum.ToObject(typeof(T), sel);
         }
 
-        private static void KeyBind(string label, MelonPreferences_Entry<string> e)
+        private static void BindRow(Bind b)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label(label, GUILayout.Width(360));
-            string txt = _capture == e ? "Нажмите клавишу… (Esc — отмена)" : e.Value;
-            if (GUILayout.Button(txt, GUILayout.Width(225)))
+            GUILayout.Label(b.Label, GUILayout.Width(250));
+            BindButton(b.Main);
+            BindButton(b.Alt);
+            GUILayout.EndHorizontal();
+        }
+
+        private static void BindButton(MelonPreferences_Entry<string> e)
+        {
+            string txt = _capture == e ? "Нажмите…" : Cfg.Pretty(e.Value);
+            if (GUILayout.Button(txt, GUILayout.Width(175)))
             {
                 _capture = e;
                 _captureFrame = Time.frameCount;
             }
-            GUILayout.EndHorizontal();
         }
     }
 }
