@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.2
+- Big map key is Tab by default.
+
 ## 1.5.1
 - "Reset settings" button in the settings window (asks for a second click to confirm).
 
