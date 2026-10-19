@@ -6,8 +6,8 @@ namespace MimesisMap
 {
     public enum RevealMode { Explored, Full }
     public enum MapStyle { Plain, Graphic }
-    public enum Orientation { NorthUp, FollowView }
-    public enum KeyMode { Toggle, Hold }
+    public enum Orientation { FollowView, NorthUp }
+    public enum KeyMode { Hold, Toggle }
     public enum MiniShape { Circle, Square }
     public enum MiniAnchor { TopLeft, TopRight, BottomLeft, BottomRight, Custom }
 
@@ -38,7 +38,7 @@ namespace MimesisMap
         public static MelonPreferences_Entry<float> MiniRange;
         public static MelonPreferences_Entry<float> MiniSize;
         public static MelonPreferences_Entry<MiniShape> MiniShapeE;
-        public static MelonPreferences_Entry<bool> MiniRotate;
+        public static MelonPreferences_Entry<Orientation> MiniOrientation;
         public static MelonPreferences_Entry<MiniAnchor> MiniAnchorE;
         public static MelonPreferences_Entry<float> MiniOffsetX;
         public static MelonPreferences_Entry<float> MiniOffsetY;
@@ -72,10 +72,10 @@ namespace MimesisMap
             SettingsKey = _cat.CreateEntry("SettingsKey", "F8", "Settings window key");
 
             BigMapKey = _cat.CreateEntry("BigMapKey", "Tab", "Big map key");
-            BigMapKeyMode = _cat.CreateEntry("BigMapKeyMode", KeyMode.Toggle, "Big map key mode", "Toggle = press to open/close, Hold = visible while held");
+            BigMapKeyMode = _cat.CreateEntry("BigMapKeyMode", KeyMode.Hold, "Big map key mode", "Hold = visible while held, Toggle = press to open/close");
             BigMapSize = _cat.CreateEntry("BigMapSize", 1f, "Big map size (fraction of the free screen area)");
             BigMapZoom = _cat.CreateEntry("BigMapZoom", 1f, "Big map zoom (1 = fit whole map)");
-            BigMapRotateE = _cat.CreateEntry("BigMapOrientation", Orientation.NorthUp, "Big map orientation", "NorthUp = fixed, FollowView = rotates with your view like the minimap");
+            BigMapRotateE = _cat.CreateEntry("BigMapOrientation", Orientation.FollowView, "Big map orientation", "FollowView = rotates with your view, NorthUp = north always up");
             BigMapInteractive = _cat.CreateEntry("BigMapInteractive", true, "Big map uses the mouse in Toggle mode (wheel = zoom, drag = pan, R = recenter)");
             BigMapMarginTop = _cat.CreateEntry("BigMapMarginTop", 20f, "Big map top margin (px @1080p)");
             BigMapMarginBottom = _cat.CreateEntry("BigMapMarginBottom", 165f, "Big map bottom margin, keeps the hotbar visible (px @1080p)");
@@ -87,7 +87,7 @@ namespace MimesisMap
             MiniRange = _cat.CreateEntry("MinimapRange", 25f, "Minimap range (metres from player to edge)");
             MiniSize = _cat.CreateEntry("MinimapSize", 260f, "Minimap size (px @1080p)");
             MiniShapeE = _cat.CreateEntry("MinimapShape", MiniShape.Circle, "Minimap shape");
-            MiniRotate = _cat.CreateEntry("MinimapRotate", true, "Minimap rotates with view");
+            MiniOrientation = _cat.CreateEntry("MinimapOrientation", Orientation.FollowView, "Minimap orientation", "FollowView = rotates with your view, NorthUp = north always up");
             MiniAnchorE = _cat.CreateEntry("MinimapAnchor", MiniAnchor.TopRight, "Minimap screen corner");
             MiniOffsetX = _cat.CreateEntry("MinimapOffsetX", 20f, "Minimap offset X");
             MiniOffsetY = _cat.CreateEntry("MinimapOffsetY", 20f, "Minimap offset Y");

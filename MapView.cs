@@ -267,7 +267,7 @@ namespace MimesisMap
             {
                 ppm = (Mathf.Min(panelSize.x, panelSize.y) * 0.5f) / Mathf.Clamp(Cfg.MiniRange.Value, 3f, 300f);
                 center = focus;
-                rot = Cfg.MiniRotate.Value ? ctx.Yaw : 0f;
+                rot = Cfg.MiniOrientation.Value == Orientation.FollowView ? ctx.Yaw : 0f;
             }
             else
             {

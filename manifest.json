@@ -1,6 +1,6 @@
 {
   "name": "MimesisMap",
-  "version_number": "1.5.2",
+  "version_number": "1.6.0",
   "website_url": "https://github.com/StimDesu/MimesisMap",
   "description": "Room-by-room building map and minimap: explored or full, exits with the shortest path out, stairs, loot. Shared exploration, in-game settings (F8). Client-side only.",
   "dependencies": [

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.0
+- Big map: Hold mode and rotation with your view are now the defaults.
+- Minimap gets the same orientation choice as the big map (rotate with view / north up).
+
 ## 1.5.2
 - Big map key is Tab by default.
 
