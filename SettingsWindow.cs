@@ -145,15 +145,15 @@ namespace MimesisMap
 
             Header("Большая карта");
             KeyBind("Клавиша", Cfg.BigMapKey);
-            Choice("Режим клавиши", Cfg.BigMapKeyMode, new[] { "Нажатие (вкл/выкл)", "Удержание" });
+            Choice("Режим клавиши", Cfg.BigMapKeyMode, new[] { "Удержание", "Нажатие (вкл/выкл)" });
             Slider("Размер (доля свободной области)", Cfg.BigMapSize, 0.3f, 1f, "0.00");
             GUILayout.Label("Отступы, чтобы карта не залезала под интерфейс игры (пикс. при 1080p):", _small);
             Slider("Отступ сверху", Cfg.BigMapMarginTop, 0f, 400f, "0");
             Slider("Отступ снизу (панель инвентаря)", Cfg.BigMapMarginBottom, 0f, 400f, "0");
             Slider("Отступ по бокам (здоровье/радиация)", Cfg.BigMapMarginSide, 0f, 800f, "0");
-            Choice("Ориентация", Cfg.BigMapRotateE, new[] { "Север всегда сверху", "Вращать по направлению взгляда" });
+            Choice("Ориентация", Cfg.BigMapRotateE, new[] { "Вращать по направлению взгляда", "Север всегда сверху" });
             Slider("Масштаб (1 = вся карта, колесо мыши / +/- в игре)", Cfg.BigMapZoom, 0.5f, 12f, "0.0");
-            Toggle("Курсор на большой карте: колесо — масштаб, перетаскивание — сдвиг, R — к игроку", Cfg.BigMapInteractive);
+            Toggle("Курсор на большой карте (в режиме «Нажатие»): колесо — масштаб, перетаскивание — сдвиг, R — к игроку", Cfg.BigMapInteractive);
             Slider("Прозрачность фона", Cfg.BigMapOpacity, 0f, 1f, "0.00");
 
             Header("Миникарта");
@@ -162,7 +162,7 @@ namespace MimesisMap
             Slider("Дальность отображения (м от игрока до края)", Cfg.MiniRange, 5f, 150f, "0");
             Slider("Размер (пикс. при 1080p)", Cfg.MiniSize, 100f, 800f, "0");
             Choice("Форма", Cfg.MiniShapeE, new[] { "Круг", "Квадрат" });
-            Toggle("Вращать вместе с направлением взгляда", Cfg.MiniRotate);
+            Choice("Ориентация", Cfg.MiniOrientation, new[] { "Вращать по направлению взгляда", "Север всегда сверху" });
             Choice("Положение", Cfg.MiniAnchorE, new[] { "Слева сверху", "Справа сверху", "Слева снизу", "Справа снизу", "Своё" });
             bool custom = Cfg.MiniAnchorE.Value == MiniAnchor.Custom;
             Slider(custom ? "Смещение X от центра" : "Отступ X от края", Cfg.MiniOffsetX, custom ? -960f : 0f, 960f, "0");
