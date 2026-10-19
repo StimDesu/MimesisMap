@@ -64,7 +64,7 @@ namespace MimesisMap
         private void Chevrons(VertexHelper vh)
         {
             const float spacing = 26f;
-            float phase = (Time.unscaledTime * 32f) % spacing;
+            float phase = Cfg.AnimatePath.Value ? (Time.unscaledTime * 32f) % spacing : spacing * 0.5f;
             float s = PathWidth * 1.35f + 1.5f;
             var col = new Color(0.85f, 1f, 0.88f, 0.95f);
             float next = phase;

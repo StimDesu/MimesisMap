@@ -1,6 +1,6 @@
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(MimesisMap.Plugin), "MimesisMap", "1.8.0", "StimDesu")]
+[assembly: MelonInfo(typeof(MimesisMap.Plugin), "MimesisMap", "1.8.1", "StimDesu")]
 [assembly: MelonGame("ReLUGames", "MIMESIS")]
 
 namespace MimesisMap

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.1
+- Stairs icon in the big map legend is visible again.
+- Option to turn off the moving arrows on the exit path (they stay in place).
+
 ## 1.8.0
 - English and Russian interface (Auto follows the system language), switchable in the settings window.
 - Settings window no longer gets a horizontal scrollbar: long labels wrap.

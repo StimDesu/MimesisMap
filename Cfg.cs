@@ -53,6 +53,7 @@ namespace MimesisMap
         public static MelonPreferences_Entry<bool> ShowMonsters;
         public static MelonPreferences_Entry<bool> ShowExit;
         public static MelonPreferences_Entry<bool> ShowExitPath;
+        public static MelonPreferences_Entry<bool> AnimatePath;
         public static MelonPreferences_Entry<float> MarkerScale;
 
         // Sharing
@@ -106,6 +107,7 @@ namespace MimesisMap
             ShowNames = _cat.CreateEntry("ShowNames", true, "Show teammate names on big map");
             ShowExit = _cat.CreateEntry("ShowExit", true, "Mark building exits and the entrance room");
             ShowExitPath = _cat.CreateEntry("ShowExitPath", true, "Shortest path to the nearest known exit");
+            AnimatePath = _cat.CreateEntry("AnimatePathArrows", true, "Arrows on the exit path move towards the exit");
             MarkerScale = _cat.CreateEntry("MarkerScale", 1f, "Marker scale");
 
             RevealByTeammates = _cat.CreateEntry("RevealByTeammates", true, "Reveal rooms where teammates have been");
