@@ -413,7 +413,7 @@ namespace MimesisMap
                 string where = model.Flat ? Loc.T("Схема локации", "Area layout")
                     : indoor ? Loc.T($"Комнат открыто: {model.RevealedCount} / {model.Tiles.Count}", $"Rooms explored: {model.RevealedCount} / {model.Tiles.Count}")
                     : Loc.T("Снаружи", "Outside");
-                var legend = "<color=#ffffff>▲</color> " + Loc.T("вы", "you") + "   <color=#c7adff>▙</color> " + Loc.T("лестница", "stairs");
+                var legend = "<color=#ffffff>▲</color> " + Loc.T("вы", "you") + "   <color=#c7adff>■</color> " + Loc.T("лестница", "stairs");
                 if (Cfg.ShowTeammates.Value) legend += "   <color=#4df2ff>▲</color> " + Loc.T("союзники", "teammates");
                 if (Cfg.ShowMonsters.Value) legend += "   <color=#ff4033>●</color> " + Loc.T("монстры", "monsters");
                 if (Cfg.ShowExit.Value) legend += "   <color=#59ff73>■</color> " + Loc.T("выход", "exit") + (Cfg.ShowExitPath.Value ? " <color=#59ff73>—</color> " + Loc.T("путь", "path") : "");

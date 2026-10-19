@@ -203,6 +203,7 @@ namespace MimesisMap
             Toggle(L("Имена союзников на большой карте", "Teammate names on the big map"), Cfg.ShowNames);
             Toggle(L("Отмечать выходы из здания и комнату-вход (зелёным)", "Mark building exits and the entrance room (green)"), Cfg.ShowExit);
             Toggle(L("Кратчайший путь до ближайшего известного выхода", "Shortest path to the nearest known exit"), Cfg.ShowExitPath);
+            Toggle(L("Анимация стрелок на пути (бегут к выходу)", "Animated arrows on the path (moving towards the exit)"), Cfg.AnimatePath);
             Slider(L("Размер меток", "Marker size"), Cfg.MarkerScale, 0.5f, 2.5f, "0.00");
 
             Header(L("Совместное исследование", "Shared exploration"));
