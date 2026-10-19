@@ -61,6 +61,10 @@ namespace MimesisMap
         // Advanced
         public static MelonPreferences_Entry<float> Resolution;
 
+        // Controls: every action has a main and an alternative binding (keyboard key, mouse button or wheel)
+        public static Bind BSettings, BBigMap, BMini, BZoomIn, BZoomOut, BRecenter;
+        public static Bind[] Binds;
+
         public static void Init()
         {
             _cat = MelonPreferences.CreateCategory("MimesisMap", "Mimesis Map");
@@ -76,7 +80,7 @@ namespace MimesisMap
             BigMapSize = _cat.CreateEntry("BigMapSize", 1f, "Big map size (fraction of the free screen area)");
             BigMapZoom = _cat.CreateEntry("BigMapZoom", 1f, "Big map zoom (1 = fit whole map)");
             BigMapRotateE = _cat.CreateEntry("BigMapOrientation", Orientation.FollowView, "Big map orientation", "FollowView = rotates with your view, NorthUp = north always up");
-            BigMapInteractive = _cat.CreateEntry("BigMapInteractive", true, "Big map uses the mouse in Toggle mode (wheel = zoom, drag = pan, R = recenter)");
+            BigMapInteractive = _cat.CreateEntry("BigMapInteractive", true, "Big map shows the cursor in Toggle mode (drag = pan)");
             BigMapMarginTop = _cat.CreateEntry("BigMapMarginTop", 20f, "Big map top margin (px @1080p)");
             BigMapMarginBottom = _cat.CreateEntry("BigMapMarginBottom", 165f, "Big map bottom margin, keeps the hotbar visible (px @1080p)");
             BigMapMarginSide = _cat.CreateEntry("BigMapMarginSide", 510f, "Big map side margin, keeps health/radiation bars visible (px @1080p)");
@@ -106,6 +110,14 @@ namespace MimesisMap
             ShareSteam = _cat.CreateEntry("ShareViaSteam", true, "Exchange explored rooms with other players that have this mod");
 
             Resolution = _cat.CreateEntry("MapResolution", 5f, "Map texels per metre (rebuild on next level)");
+
+            BSettings = new Bind("Окно настроек", SettingsKey, _cat.CreateEntry("SettingsKeyAlt", "", "Settings window key (alternative)"));
+            BBigMap = new Bind("Большая карта", BigMapKey, _cat.CreateEntry("BigMapKeyAlt", "", "Big map key (alternative)"));
+            BMini = new Bind("Миникарта вкл/выкл", MiniKey, _cat.CreateEntry("MinimapKeyAlt", "", "Minimap toggle key (alternative)"));
+            BZoomIn = new Bind("Приблизить большую карту", _cat.CreateEntry("ZoomInKey", "Equals", "Big map zoom in"), _cat.CreateEntry("ZoomInKeyAlt", "WheelUp", "Big map zoom in (alternative)"));
+            BZoomOut = new Bind("Отдалить большую карту", _cat.CreateEntry("ZoomOutKey", "Minus", "Big map zoom out"), _cat.CreateEntry("ZoomOutKeyAlt", "WheelDown", "Big map zoom out (alternative)"));
+            BRecenter = new Bind("Большая карта: к себе", _cat.CreateEntry("RecenterKey", "R", "Big map recenter"), _cat.CreateEntry("RecenterKeyAlt", "Home", "Big map recenter (alternative)"));
+            Binds = new[] { BBigMap, BZoomIn, BZoomOut, BRecenter, BMini, BSettings };
         }
 
         /// <summary>Puts every MimesisMap setting back to its built-in default and saves.</summary>
@@ -129,18 +141,91 @@ namespace MimesisMap
             return Enum.TryParse(name, true, out key) && key != Key.None;
         }
 
-        public static bool Pressed(MelonPreferences_Entry<string> e)
+        // ---- binding names: Key enum names, or the mouse names below; "" = unbound
+        public const string WheelUp = "WheelUp", WheelDown = "WheelDown";
+
+        private static UnityEngine.InputSystem.Controls.ButtonControl MouseButton(Mouse m, string name)
         {
-            var kb = Keyboard.current;
-            if (kb == null || !TryKey(e.Value, out var k)) return false;
-            try { return kb[k].wasPressedThisFrame; } catch { return false; }
+            switch (name)
+            {
+                case "MouseMiddle": return m.middleButton;
+                case "MouseRight": return m.rightButton;
+                case "MouseBack": return m.backButton;
+                case "MouseForward": return m.forwardButton;
+                default: return null;
+            }
         }
 
-        public static bool Held(MelonPreferences_Entry<string> e)
+        public static bool PressedName(string name)
         {
-            var kb = Keyboard.current;
-            if (kb == null || !TryKey(e.Value, out var k)) return false;
-            try { return kb[k].isPressed; } catch { return false; }
+            if (string.IsNullOrEmpty(name)) return false;
+            try
+            {
+                var m = Mouse.current;
+                if (name == WheelUp) return m != null && m.scroll.ReadValue().y > 0.01f;
+                if (name == WheelDown) return m != null && m.scroll.ReadValue().y < -0.01f;
+                var mb = m != null ? MouseButton(m, name) : null;
+                if (mb != null) return mb.wasPressedThisFrame;
+                var kb = Keyboard.current;
+                return kb != null && TryKey(name, out var k) && kb[k].wasPressedThisFrame;
+            }
+            catch { return false; }
+        }
+
+        public static bool HeldName(string name)
+        {
+            if (string.IsNullOrEmpty(name) || name == WheelUp || name == WheelDown) return false;
+            try
+            {
+                var m = Mouse.current;
+                var mb = m != null ? MouseButton(m, name) : null;
+                if (mb != null) return mb.isPressed;
+                var kb = Keyboard.current;
+                return kb != null && TryKey(name, out var k) && kb[k].isPressed;
+            }
+            catch { return false; }
+        }
+
+        public static string Pretty(string name)
+        {
+            switch (name)
+            {
+                case null: case "": return "—";
+                case WheelUp: return "Колесо вверх";
+                case WheelDown: return "Колесо вниз";
+                case "MouseMiddle": return "Средняя кн. мыши";
+                case "MouseRight": return "Правая кн. мыши";
+                case "MouseBack": return "Мышь: назад";
+                case "MouseForward": return "Мышь: вперёд";
+                case "Equals": return "=";
+                case "Minus": return "-";
+                default: return name;
+            }
+        }
+    }
+
+    /// <summary>An action with a main and an alternative binding.</summary>
+    internal sealed class Bind
+    {
+        public readonly string Label;
+        public readonly MelonPreferences_Entry<string> Main, Alt;
+
+        public Bind(string label, MelonPreferences_Entry<string> main, MelonPreferences_Entry<string> alt)
+        {
+            Label = label; Main = main; Alt = alt;
+        }
+
+        public bool Pressed => Cfg.PressedName(Main.Value) || Cfg.PressedName(Alt.Value);
+        public bool Held => Cfg.HeldName(Main.Value) || Cfg.HeldName(Alt.Value);
+
+        public string Text
+        {
+            get
+            {
+                bool m = !string.IsNullOrEmpty(Main.Value), a = !string.IsNullOrEmpty(Alt.Value);
+                if (m && a) return Cfg.Pretty(Main.Value) + " / " + Cfg.Pretty(Alt.Value);
+                return m ? Cfg.Pretty(Main.Value) : a ? Cfg.Pretty(Alt.Value) : "—";
+            }
         }
     }
 }

@@ -416,7 +416,7 @@ namespace MimesisMap
                 if (Cfg.ShowMonsters.Value) legend += "   <color=#ff4033>●</color> монстры";
                 if (Cfg.ShowExit.Value) legend += "   <color=#59ff73>■</color> выход" + (Cfg.ShowExitPath.Value ? " <color=#59ff73>—</color> путь" : "");
                 if (Cfg.ShowLoot.Value) legend += "   лут: <color=#f2f28c>◆</color> дешёвый <color=#ffb833>◆</color> средний <color=#ff4dd9>◆</color> ценный";
-                _info.text = $"{where}   (режим: {mode})\n<size=15>{legend}\n<color=#9ab>[{Cfg.BigMapKey.Value}] закрыть   колесо/[+]/[-] масштаб   перетаскивание — сдвиг   [R] к себе   [{Cfg.SettingsKey.Value}] настройки</color></size>";
+                _info.text = $"{where}   (режим: {mode})\n<size=15>{legend}\n<color=#9ab>[{Cfg.BBigMap.Text}] закрыть   [{Cfg.BZoomIn.Text}] / [{Cfg.BZoomOut.Text}] масштаб   [{Cfg.BRecenter.Text}] к себе   [{Cfg.BSettings.Text}] настройки</color></size>";
             }
         }
 
