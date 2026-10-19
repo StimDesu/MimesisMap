@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.8.2
+- README: Install and Uninstall sections, AI disclosure section, clearer license wording. No changes to the mod itself.
+
 ## 1.8.1
 - Stairs icon in the big map legend is visible again.
 - Option to turn off the moving arrows on the exit path (they stay in place).
