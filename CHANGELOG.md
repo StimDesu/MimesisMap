@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.1
+- "Reset settings" button in the settings window (asks for a second click to confirm).
+
 ## 1.5.0
 - Settings window is opaque and high-contrast; hints are readable.
 - Big map stays inside a free screen area so it no longer covers the health/radiation bars and the hotbar (margins adjustable in settings).
