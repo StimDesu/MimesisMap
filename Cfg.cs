@@ -71,7 +71,7 @@ namespace MimesisMap
             ShowOutdoor = _cat.CreateEntry("ShowOutdoor", true, "Show outdoor area");
             SettingsKey = _cat.CreateEntry("SettingsKey", "F8", "Settings window key");
 
-            BigMapKey = _cat.CreateEntry("BigMapKey", "N", "Big map key");
+            BigMapKey = _cat.CreateEntry("BigMapKey", "Tab", "Big map key");
             BigMapKeyMode = _cat.CreateEntry("BigMapKeyMode", KeyMode.Toggle, "Big map key mode", "Toggle = press to open/close, Hold = visible while held");
             BigMapSize = _cat.CreateEntry("BigMapSize", 1f, "Big map size (fraction of the free screen area)");
             BigMapZoom = _cat.CreateEntry("BigMapZoom", 1f, "Big map zoom (1 = fit whole map)");
