@@ -41,7 +41,7 @@ Every action has a main and an alternative binding (keys, mouse wheel, mouse but
 
 ## Install
 
-- **r2modman / Gale**: install *MimesisMap* from Thunderstore.
+- **r2modman / Gale**: install [MimesisMap from Thunderstore](https://thunderstore.io/c/mimesis/p/StimDesu/MimesisMap/).
 - **Manually**: install [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) 0.7.x, then put `MimesisMap.dll` from the [releases](https://github.com/StimDesu/MimesisMap/releases) into the game's `Mods` folder.
 
 ## Build from source
@@ -103,7 +103,7 @@ Thanks to [medovanx](https://github.com/medovanx/mimesis-patches) and [ToxesFoxe
 
 ### Установка
 
-- **r2modman / Gale**: установите *MimesisMap* из Thunderstore.
+- **r2modman / Gale**: установите [MimesisMap из Thunderstore](https://thunderstore.io/c/mimesis/p/StimDesu/MimesisMap/).
 - **Вручную**: установите [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) 0.7.x и положите `MimesisMap.dll` из [релизов](https://github.com/StimDesu/MimesisMap/releases) в папку игры `Mods`.
 
 ### Сборка из исходников
